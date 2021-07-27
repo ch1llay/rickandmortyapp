@@ -25,34 +25,58 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("The Rick and Morty Characters"),
       ),
-      body: Column( 
-        children: <Character>[
-          Character("1","1","1","1","1","1")
-          ],
-      ),
+      body: Column(children: <CharacterField>[
+        CharacterField.character(
+            "name",
+            "status",
+            "species",
+            "type",
+            "gender",
+            "location",
+            "https://rickandmortyapi.com/api/character/avatar/2.jpeg")
+      ]),
     );
   }
 }
 
-
-class Character{
+class CharacterField extends StatelessWidget {
   String name;
   String status;
   String species;
   String type;
   String gender;
   String location;
+  String image;
 
-  Character(this.name, this.status, this.species, this.type, this.gender, this.location);
-
-}
-
-class name extends StatelessWidget {
+  CharacterField.character(this.name, this.status, this.species, this.type,
+      this.gender, this.location, this.image);
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [],),
+    return Row(
+      children: [
+        Container(child: Image.network(image), width: 100, height: 100),
+        Container(
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.only(left: 10),
+          child: Column(
+            children: [
+              Text(name),
+              Row(
+                children: [
+                  Text(status),
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(species),
+                  ),
+                ],
+              ),
+              Text("Last known location:"),
+              Text(location),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
-

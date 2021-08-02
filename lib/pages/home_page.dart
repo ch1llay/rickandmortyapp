@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import "package:flutter/material.dart";
-import 'package:rickandmortyapp/models/Character.dart';
+import 'package:rickandmortyapp/models/CharacterField.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
           if (_isLoading)
             for (int i = 0; i < data.length; i++)
               CharacterField(
+                  i,
                   data[i]["name"],
                   data[i]["status"],
                   data[i]["species"],

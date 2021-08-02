@@ -86,34 +86,74 @@ class CharacterPageWidget extends StatelessWidget {
   final String image;
   final List episodes;
 
+  var colorCircle;
+
   CharacterPageWidget(this.name, this.status, this.species, this.type,
       this.gender, this.location, this.image, this.episodes);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(child: Image.network(image)),
-        Text(name),
-        Text("Live Status"),
-        Text(status),
-        Text("Species and Gender"),
-        Text("$species($gender)"),
-        Text("Last known location"),
-        Text(location),
-        Text("First seen in"),
-        Text(episodes[0]["name"]),
-        Text("Episodes"),
-        for (int i = 0; i < episodes.length; i++) _buildEpisode(i)
-      ], // верстка страницы
-    );
+    if (status == "Alive")
+      colorCircle = Colors.green;
+    else
+      colorCircle = Colors.grey;
+    return Container(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(alignment: Alignment.center, child: Image.network(image)),
+            Text(name,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text("Live Status", style: TextStyle(color: Colors.grey)),
+            Row(
+              children: [
+                Container(
+                  width: 5,
+                  height: 5,
+                  margin: EdgeInsets.only(right: 5),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: colorCircle,
+                  ),
+                ),
+                Text(status),
+              ],
+            ),
+            Container(margin: EdgeInsets.only(bottom: 5)),
+            Text("Species and Gender", style: TextStyle(color: Colors.grey)),
+            Text("$species($gender)"),
+            Container(margin: EdgeInsets.only(bottom: 5)),
+            Text("Last known location", style: TextStyle(color: Colors.grey)),
+            Text(location),
+            Container(margin: EdgeInsets.only(bottom: 5)),
+            Text("First seen in", style: TextStyle(color: Colors.grey)),
+            Text(episodes[0]["name"]),
+            Container(margin: EdgeInsets.only(bottom: 10)),
+            Text("Episodes",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Container(margin: EdgeInsets.only(bottom: 5)),
+            for (int i = 0; i < episodes.length; i++) _buildEpisode(i)
+          ], // верстка страницы
+        ));
   }
 
   Widget _buildEpisode(int i) => Container(
-          child: Column(
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(left: 5, right: 5),
+      color: Colors.grey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: [Text(episodes[i]["name"]), Text(episodes[i]["episode"])],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(episodes[i]["name"]),
+              Text(
+                episodes[i]["episode"],
+                textAlign: TextAlign.end,
+              )
+            ],
           ),
           Text(episodes[i]["date"]),
         ],

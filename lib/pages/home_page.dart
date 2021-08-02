@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List data = [];
   bool _isLoading = false;
+  String text = "";
 
   void getHttp() async {
     try {
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
       });
     } catch (e) {
       print(e);
+      text = e.toString();
     }
   }
 
@@ -39,6 +41,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: [
+          Text(text),
           if (_isLoading)
             for (int i = 0; i < data.length; i++)
               CharacterField(

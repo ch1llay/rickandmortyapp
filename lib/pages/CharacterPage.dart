@@ -14,6 +14,7 @@ class _CharacterPageState extends State<CharacterPage> {
   Map data = {};
   bool _isLoading = false;
   List episodes = [];
+  String text = "";
 
   void getHttp() async {
     try {
@@ -40,6 +41,7 @@ class _CharacterPageState extends State<CharacterPage> {
       });
     } catch (e) {
       print(e);
+      text = e.toString();
     }
   }
 
@@ -57,17 +59,17 @@ class _CharacterPageState extends State<CharacterPage> {
       ),
       body: ListView(
         children: [
+          Text(text),
           if (_isLoading)
-            for (int i = 0; i < data.length; i++)
-              CharacterPageWidget(
-                  data["name"],
-                  data["status"],
-                  data["species"],
-                  data["type"],
-                  data["gender"],
-                  data["location"]["name"],
-                  data["image"],
-                  episodes)
+            CharacterPageWidget(
+                data["name"],
+                data["status"],
+                data["species"],
+                data["type"],
+                data["gender"],
+                data["location"]["name"],
+                data["image"],
+                episodes)
           else
             Center(child: Text("загрузка")),
         ],

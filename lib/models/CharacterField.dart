@@ -15,14 +15,14 @@ class CharacterField extends StatelessWidget {
   CharacterField(this.id, this.name, this.status, this.species, this.type,
       this.gender, this.location, this.image);
 
-  @override
-  Widget _buildCharacterPage() => Column(
-        children: [
-          Container(child: Image.network(image)),
-          Text(name),
-          Text("Live status")
-        ],
-      );
+  // @override
+  // Widget _buildCharacterPage() => Column(
+  //       children: [
+  //         Container(child: Image.network(image)),
+  //         Text(name),
+  //         Text("Live status")
+  //       ],
+  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +31,16 @@ class CharacterField extends StatelessWidget {
     else
       colorCircle = Colors.grey;
     return GestureDetector(
-        onTap: () => 1,
+        onTap: () => print(name),
         child: Container(
+          margin: EdgeInsets.only(top: 10),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Colors.grey[800],
             borderRadius: BorderRadius.circular(20),
           ),
-          margin: EdgeInsets.only(top: 10),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Flexible(
                   child: Container(
@@ -50,8 +51,9 @@ class CharacterField extends StatelessWidget {
               Flexible(
                 flex: 5,
                 child: Container(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10, top: 10),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(

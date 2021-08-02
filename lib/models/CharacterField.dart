@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:rickandmortyapp/pages/CharacterPage.dart';
 
 class CharacterField extends StatelessWidget {
   final int id;
@@ -12,8 +13,8 @@ class CharacterField extends StatelessWidget {
 
   var colorCircle;
 
-  CharacterField(this.id, this.name, this.status, this.species, this.type,
-      this.gender, this.location, this.image);
+  CharacterField(this.id, this.name, this.status, this.species, this.type, this.gender,
+      this.location, this.image);
 
   // @override
   // Widget _buildCharacterPage() => Column(
@@ -31,7 +32,11 @@ class CharacterField extends StatelessWidget {
     else
       colorCircle = Colors.grey;
     return GestureDetector(
-        onTap: () => print(name),
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    CharacterPage(id))), // конструктор со страницей(передать все данные)
         child: Container(
           margin: EdgeInsets.only(top: 10),
           clipBehavior: Clip.antiAlias,

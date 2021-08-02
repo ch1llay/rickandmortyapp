@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _isLoading = true;
         data = response.data["results"];
-        print(data[0]["name"]);
+        print("${data[0]["name"]} homePage");
       });
     } catch (e) {
       print(e);

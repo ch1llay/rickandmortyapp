@@ -10,6 +10,8 @@ class CharacterField extends StatelessWidget {
   final String location;
   final String image;
 
+  var colorCircle;
+
   CharacterField(this.id, this.name, this.status, this.species, this.type,
       this.gender, this.location, this.image);
 
@@ -24,20 +26,29 @@ class CharacterField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (status == "Alive")
+      colorCircle = Colors.green;
+    else
+      colorCircle = Colors.grey;
     return GestureDetector(
         onTap: () => 1,
         child: Container(
-          color: Colors.grey[800],
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: Colors.grey[800],
+            borderRadius: BorderRadius.circular(20),
+          ),
           margin: EdgeInsets.only(top: 10),
           child: Row(
             children: <Widget>[
-              Text(""),
-              Container(
-                  margin: EdgeInsets.only(left: 5),
-                  child: Image.network(image),
-                  width: 100,
-                  height: 100),
               Flexible(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 5),
+                    child: Image.network(image),
+                  ),
+                  flex: 3),
+              Flexible(
+                flex: 5,
                 child: Container(
                   padding: EdgeInsets.only(left: 10),
                   child: Column(
@@ -45,11 +56,22 @@ class CharacterField extends StatelessWidget {
                     children: [
                       Text(
                         name,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.left,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          Container(
+                            width: 5,
+                            height: 5,
+                            margin: EdgeInsets.only(right: 5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: colorCircle,
+                            ),
+                          ),
                           Text(status),
                           Container(
                             margin: EdgeInsets.only(left: 10),
@@ -57,7 +79,8 @@ class CharacterField extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text("Last known location:"),
+                      Text("Last known location:",
+                          style: TextStyle(color: Colors.grey[500])),
                       Text(location),
                     ],
                   ),

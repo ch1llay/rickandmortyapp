@@ -13,17 +13,8 @@ class CharacterField extends StatelessWidget {
 
   var colorCircle;
 
-  CharacterField(this.id, this.name, this.status, this.species, this.type, this.gender,
-      this.location, this.image);
-
-  // @override
-  // Widget _buildCharacterPage() => Column(
-  //       children: [
-  //         Container(child: Image.network(image)),
-  //         Text(name),
-  //         Text("Live status")
-  //       ],
-  //     );
+  CharacterField(this.id, this.name, this.status, this.species, this.type,
+      this.gender, this.location, this.image);
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +26,8 @@ class CharacterField extends StatelessWidget {
         onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    CharacterPage(id))), // конструктор со страницей(передать все данные)
+                builder: (context) => CharacterPage(
+                    id))), // конструктор со страницей(передать все данные)
         child: Container(
           margin: EdgeInsets.only(top: 10),
           clipBehavior: Clip.antiAlias,

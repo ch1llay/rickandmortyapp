@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rickandmortyapp/pages/home_page.dart';
+import 'package:rickandmortyapp/pages/MenuPage.dart';
+import 'package:rickandmortyapp/pages/CharactersPage.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rick and Morty Characters',
       theme: ThemeData.dark(),
-      home: HomePage(),
+      home: CharactersPage(),
     );
   }
 }

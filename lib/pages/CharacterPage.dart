@@ -8,7 +8,12 @@ class CharacterPage extends StatefulWidget {
   _CharacterPageState createState() => _CharacterPageState(id);
 }
 
-class _CharacterPageState extends State<CharacterPage> {
+class _CharacterPageState extends State<CharacterPage>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 1),
+    vsync: this,
+  )..repeat();
   final int id;
   _CharacterPageState(this.id);
   Map data = {};
@@ -20,7 +25,6 @@ class _CharacterPageState extends State<CharacterPage> {
     try {
       var response = await Dio()
           .get('https://rickandmortyapi.com/api/character/${id + 1}');
-      print(22);
       var tempEpisodes = [];
       print(response.data);
       print(response.data["episode"]);
@@ -71,7 +75,14 @@ class _CharacterPageState extends State<CharacterPage> {
                 data["image"],
                 episodes)
           else
-            Center(child: Text("загрузка")),
+            Column(children: [
+              Text("Загрузка"),
+              RotationTransition(
+                  turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                  child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Icon(Icons.arrow_circle_down, size: 60)))
+            ]),
         ],
       ),
     );
@@ -136,7 +147,7 @@ class CharacterPageWidget extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             Container(margin: EdgeInsets.only(bottom: 5)),
             for (int i = 0; i < episodes.length; i++) _buildEpisode(i)
-          ], // верстка страницы
+          ],
         ));
   }
 
